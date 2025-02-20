@@ -1,0 +1,172 @@
+
+    .gradient-text {
+      background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .free-tag {
+      background: rgba(34, 197, 94, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+body {
+      font-family: 'Inter', sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .gradient-text {
+      background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lesson-card:hover {
+      transform: translateY(-4px);
+      transition: transform 0.2s ease-in-out;
+    }
+    .label-required {
+      background: rgba(59, 130, 246, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #3B82F6;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+    }
+    .label-intermediate {
+      background: rgba(168, 85, 247, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: #A855F7;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+    }
+    .label-expert {
+      background: rgba(16, 185, 129, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #10B981;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+    }
+    .highlight {
+      background-color: rgba(255, 255, 0, 0.3);
+    }
+    .test-card {
+      border: 2px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+    }
+    /* Autosuggest styles */
+    #suggestions {
+      position: absolute;
+      z-index: 1000;
+      width: 100%;
+      max-width: 600px;
+      background: rgba(31, 41, 55, 0.95);
+      border: 1px solid #374151;
+      border-top: none;
+      border-radius: 0 0 0.5rem 0.5rem;
+      overflow: hidden;
+    }
+    .suggestion-item {
+      padding: 0.75rem;
+      cursor: pointer;
+    }
+    .suggestion-item:hover {
+      background: rgba(55, 65, 81, 0.8);
+    }
+    /* Modal styles */
+    #lessonModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
+    #lessonModal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    #lessonModal .modal-content {
+      background: rgba(31, 41, 55, 0.95);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+    }
+    #lessonModal .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    /* Custom dropdown styles */
+    .custom-dropdown {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      min-width: 150px;
+    }
+    .custom-dropdown .dropdown-toggle {
+      padding: 0 1rem;
+      background: rgba(31, 41, 55, 0.95);
+      border: 1px solid #374151;
+      border-radius: 0.375rem;
+      color: white;
+      font-size: 0.875rem;
+      text-align: left;
+      width: 100%;
+      height: 2.75rem; /* Same as input */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .custom-dropdown .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(31, 41, 55, 0.95);
+      border: 1px solid #374151;
+      border-top: none;
+      border-radius: 0 0 0.375rem 0.375rem;
+      z-index: 1100;
+      display: none;
+    }
+    .custom-dropdown .dropdown-menu.show {
+      display: block;
+    }
+    .custom-dropdown .dropdown-item {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+    .custom-dropdown .dropdown-item:hover {
+      background: rgba(55, 65, 81, 0.8);
+    }
+    /* Ensure main content maintains minimum height to prevent footer jump */
+    main {
+      min-height: 400px;
+    }
