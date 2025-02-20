@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Landing Page 01</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Sans+Pro:wght@400;600&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+        <style>
+            h1,
+            h2,
+            h3 {
+                font-family: "Inter", serif;
+            }
+
+            body {
+                font-family: "Source Sans Pro", sans-serif;
+            }
+        </style>
+    </head>
+    <body class="w-screen max-w-[1400px] min-h-svh bg-white text-black">
+        <div class="p-12 h-full">
+            <div class="upper__part w-full w-full flex justify-center mb-40">
+                <div class="w-1/3">
+                    <h1 class="text-6xl leading-[66px] mt-10 font-medium">
+                        Discover the <br />
+                        beauty around <br />the world
+                    </h1>
+                    <p class="leading-8 my-4 text-xl">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Sunt suscipit sint obcaecati atque laudantium
+                        fugit voluptatibus id dolor explicabo.
+                    </p>
+
+                    <button
+                        class="text-md bg-black hover:shadow-md hover:translate-x-[1px] text-slate-100 py-2 px-6 rounded-xl"
+                    >
+                        Get Started
+                    </button>
+                </div>
+                <div class="w-2/3 h-full px-12">
+                    <div class="relative">
+                        <div class="absolute">
+                            <img
+                                src="https://picsum.photos/350/400?random=1"
+                                class="rounded-xl"
+                                alt="Random Image 1"
+                            />
+                        </div>
+                        <div class="absolute top-24 right-0">
+                            <img
+                                src="https://picsum.photos/350/400?random=2"
+                                class="rounded-xl"
+                                alt="Random Image 2"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lower__part flex items-center gap-4 mt-6">
+                <img
+                    src="https://picsum.photos/400/300?random=3"
+                    class="rounded-xl"
+                    alt="Random Image 3"
+                />
+                <img
+                    src="https://picsum.photos/400/300?random=4"
+                    class="rounded-xl"
+                    alt="Random Image 4"
+                />
+                <img
+                    src="https://picsum.photos/400/300?random=5"
+                    class="rounded-xl"
+                    alt="Random Image 5"
+                />
+            </div>
+        </div>
+    </body>
+</html>
