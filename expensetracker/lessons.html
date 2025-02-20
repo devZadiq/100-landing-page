@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeyZen - Typing Lessons</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="./css/main.css" rel="stylesheet"></style>
+</head>
+<body class="bg-slate-950 text-white">
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-[999] bg-slate-950 bg-opacity-90 border-b border-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="text-2xl font-bold gradient-text">KeyZen</div>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-gray-300">Home</a>
+        <a href="practice.html" class="hover:text-gray-300">Practice</a>
+        <a href="#progress" class="hover:text-gray-300">Progress</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="pt-24 container mx-auto px-6 pb-20 relative">
+    <!-- Progress Overview -->
+    <div class="glass p-8 mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold">Your Learning Journey</h1>
+        <div class="text-right">
+          <p class="text-gray-400">Current Level: <span id="currentLevelText" class="text-blue-400 font-semibold">Beginner</span></p>
+          <p class="text-gray-400">Lessons Completed: <span id="lessonsCompletedText" class="text-blue-400 font-semibold">0/30</span></p>
+        </div>
+      </div>
+      <div class="w-full bg-gray-800 rounded-full h-4">
+        <div class="bg-blue-600 h-4 rounded-full" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Filter Controls: Search + Custom Dropdowns -->
+    <div class="mb-12 flex items-center gap-4">
+      <!-- Search Input takes remaining width -->
+      <div class="relative flex-grow">
+        <input type="text" id="lessonSearch" placeholder="Search lessons..." class="w-full p-3 rounded bg-slate-800 border border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <div id="suggestions" class="hidden"></div>
+      </div>
+      <!-- Dropdowns aligned to right -->
+      <div class="flex gap-4">
+        <div class="custom-dropdown" id="categoryDropdown">
+          <button class="dropdown-toggle">All Categories <i class="fas fa-chevron-down ml-2"></i></button>
+          <div class="dropdown-menu">
+            <div class="dropdown-item" data-value="">All Categories</div>
+            <div class="dropdown-item" data-value="Fundamentals">Fundamentals</div>
+            <div class="dropdown-item" data-value="Programming">Programming</div>
+            <div class="dropdown-item" data-value="Advanced">Advanced</div>
+          </div>
+        </div>
+        <div class="custom-dropdown" id="sortDropdown">
+          <button class="dropdown-toggle">Sort: Default <i class="fas fa-chevron-down ml-2"></i></button>
+          <div class="dropdown-menu">
+            <div class="dropdown-item" data-value="default">Default</div>
+            <div class="dropdown-item" data-value="alphabetical">Alphabetical</div>
+            <div class="dropdown-item" data-value="rating">Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Lesson List (Grouped by Category) -->
+    <div id="lessonsContainer" class="space-y-8"></div>
+  </main>
+
+  <!-- Modal for Lesson Preview -->
+  <div id="lessonModal">
+    <div class="modal-content glass">
+      <span class="close-modal">&times;</span>
+      <div id="modalBody"></div>
+      <div class="mt-4 text-right">
+        <button id="viewFullLesson" class="px-4 py-2 bg-blue-600 rounded-full hover:bg-blue-700 transition duration-300">View Full Lesson</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-gray-800 mt-20">
+    <div class="container mx-auto px-6 text-center text-gray-400">
+      <p>&copy; 2025 KeyZen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Font Awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  <!-- Include lessons.js -->
+  <script src="./js/lessons.js"></script>
+</body>
+</html>
