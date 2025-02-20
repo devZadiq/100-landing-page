@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeyZen - Lesson Detail</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .gradient-text {
+      background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .step-card {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+    }
+    /* Virtual Keyboard */
+    .virtual-keyboard {
+      display: none;
+    }
+    .virtual-keyboard.active {
+      display: block;
+    }
+    .virtual-key {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin: 0.25rem;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 4px;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      font-weight: bold;
+    }
+    .virtual-key.highlight {
+      background-color: #10B981;
+      color: black;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-white">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-[999] bg-slate-950 bg-opacity-90 border-b border-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="text-2xl font-bold gradient-text">KeyZen</div>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-gray-300">Home</a>
+        <a href="lessons.html" class="hover:text-gray-300">Lessons</a>
+        <a href="practice.html" class="hover:text-gray-300">Practice</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="pt-24 container mx-auto px-6 pb-20">
+    <div id="lessonDetailContainer" class="glass p-8">
+      <!-- Lesson Overview -->
+      <h1 id="lessonTitle" class="text-4xl font-bold mb-4"></h1>
+      <p id="lessonOverview" class="mb-6"></p>
+      <div id="lessonMetadata" class="mb-6 text-sm text-gray-400"></div>
+
+      <!-- Step-by-Step Lesson Content -->
+      <div id="lessonSteps" class="mb-8">
+        <!-- Step cards will be inserted here -->
+      </div>
+
+      <!-- Practice Module -->
+      <div id="practiceModule" class="glass p-4 mb-8">
+        <h2 class="text-2xl font-bold mb-2">Practice Module</h2>
+        <p id="practiceInstructions" class="mb-4"></p>
+        <p id="practiceText" class="mb-4 font-mono text-lg"></p>
+        <!-- Toggle Virtual Keyboard -->
+        <button id="toggleKeyboard" class="px-4 py-2 bg-blue-600 rounded-full hover:bg-blue-700 transition duration-300 mb-4">Show Virtual Keyboard</button>
+        <div id="virtualKeyboard" class="virtual-keyboard glass p-4 rounded">
+          <div id="keyboardKeys" class="grid grid-cols-10 gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Additional Resources -->
+      <div id="lessonResources" class="mb-8">
+        <h2 class="text-2xl font-bold mb-2">Additional Resources</h2>
+        <ul id="resourceList" class="list-disc ml-6"></ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-gray-800 mt-20">
+    <div class="container mx-auto px-6 text-center text-gray-400">
+      <p>&copy; 2025 KeyZen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Virtual Keyboard Component Script -->
+  <script>
+    const keyboardLayout = ["A","S","D","F","J","K","L",";"];
+    function renderKeyboard() {
+      const container = document.getElementById("keyboardKeys");
+      container.innerHTML = "";
+      keyboardLayout.forEach(key => {
+        const keyDiv = document.createElement("div");
+        keyDiv.className = "virtual-key";
+        keyDiv.innerText = key;
+        keyDiv.dataset.key = key.toUpperCase();
+        container.appendChild(keyDiv);
+      });
+    }
+    renderKeyboard();
+    
+    document.getElementById("toggleKeyboard").addEventListener("click", function() {
+      const kb = document.getElementById("virtualKeyboard");
+      if (kb.classList.contains("active")) {
+        kb.classList.remove("active");
+        this.innerText = "Show Virtual Keyboard";
+      } else {
+        kb.classList.add("active");
+        this.innerText = "Hide Virtual Keyboard";
+      }
+    });
+    
+    function highlightExpectedKey(expectedKey) {
+      document.querySelectorAll("#keyboardKeys .virtual-key").forEach(item => {
+        if (item.dataset.key === expectedKey.toUpperCase()) {
+          item.classList.add("highlight");
+        } else {
+          item.classList.remove("highlight");
+        }
+      });
+    }
+  </script>
+
+  <!-- Lesson Detail Page Script -->
+  <script>
+    // Helper to get query parameter.
+    function getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+    
+    // Load lesson JSON data.
+    // For demo purposes, we simulate loading lesson data for lesson "home-row".
+    function loadLessonData() {
+      const lessonParam = getQueryParam("lesson");
+      if (lessonParam === "home-row") {
+        return {
+          "lessonId": "home-row",
+          "title": "Home Row Position",
+          "category": "Fundamentals",
+          "level": "Required",
+          "rating": 4.5,
+          "overview": "In this lesson, you'll learn the fundamental home row positions. Proper finger placement on the keys A, S, D, F, J, K, L, ; is crucial to developing speed and accuracy. You'll learn the correct posture and hand positioning before practicing drills that build muscle memory.",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "title": "Posture and Hand Positioning",
+              "instruction": "Sit upright with your back straight and shoulders relaxed. Rest your left hand on A, S, D, F and your right hand on J, K, L, ;. Keep your wrists relaxed.",
+              "visualAid": "",
+              "practiceText": "",
+              "notes": "Maintain proper posture throughout your practice."
+            },
+            {
+              "stepNumber": 2,
+              "title": "Familiarization with the Home Row",
+              "instruction": "Identify each key on the home row. Notice the tactile bumps on F and J that help you locate the keys without looking.",
+              "visualAid": "",
+              "practiceText": "",
+              "notes": "Memorize the layout before proceeding."
+            },
+            {
+              "stepNumber": 3,
+              "title": "Basic Practice Sequence",
+              "instruction": "Practice typing the sequence 'ASDF JKL;' slowly, focusing on accuracy and proper finger placement.",
+              "visualAid": "",
+              "practiceText": "ASDF JKL;",
+              "notes": "Repeat this sequence until you can type it without looking."
+            },
+            {
+              "stepNumber": 4,
+              "title": "Speed Drills",
+              "instruction": "Increase your speed while maintaining accuracy. Practice the sequence multiple times to build rhythm and muscle memory.",
+              "visualAid": "",
+              "practiceText": "ASDF JKL; ASDF JKL; ASDF JKL;",
+              "notes": "Focus on fluid movement and consistency."
+            }
+          ],
+          "practiceModule": {
+            "practiceText": "ASDF JKL;",
+            "instructions": "Type the sequence exactly as shown. Use the virtual keyboard for guidance.",
+            "virtualKeyboardLayout": {
+              "keys": ["A", "S", "D", "F", "J", "K", "L", ";"],
+              "highlightColor": "#10B981"
+            }
+          },
+          "resources": [
+            {
+              "type": "article",
+              "title": "Proper Typing Posture and Techniques",
+              "url": "https://example.com/articles/typing-posture"
+            },
+            {
+              "type": "article",
+              "title": "Finger Placement Techniques for Typing",
+              "url": "https://example.com/articles/finger-placement"
+            }
+          ]
+        };
+      }
+      return null;
+    }
+    
+    function renderLessonDetail(lessonData) {
+      if (!lessonData) {
+        document.getElementById("lessonDetailContainer").innerHTML = "<p class='text-center text-gray-400'>Lesson not found.</p>";
+        return;
+      }
+      document.getElementById("lessonTitle").innerText = lessonData.title;
+      document.getElementById("lessonOverview").innerText = lessonData.overview;
+      document.getElementById("lessonMetadata").innerText = `Category: ${lessonData.category} | Level: ${lessonData.level} | Rating: ${lessonData.rating} ★`;
+      
+      const stepsContainer = document.getElementById("lessonSteps");
+      stepsContainer.innerHTML = "";
+      lessonData.steps.forEach(step => {
+        const stepDiv = document.createElement("div");
+        stepDiv.className = "step-card glass p-4 mb-4";
+        stepDiv.innerHTML = `
+          <h3 class="text-xl font-bold mb-2">Step ${step.stepNumber}: ${step.title}</h3>
+          <p class="mb-2">${step.instruction}</p>
+          ${step.practiceText ? `<p class="font-mono text-lg mb-2">${step.practiceText}</p>` : ""}
+          ${step.notes ? `<p class="text-sm text-gray-400">${step.notes}</p>` : ""}
+        `;
+        stepsContainer.appendChild(stepDiv);
+      });
+      
+      if (lessonData.practiceModule) {
+        document.getElementById("practiceInstructions").innerText = lessonData.practiceModule.instructions;
+        document.getElementById("practiceText").innerText = lessonData.practiceModule.practiceText;
+      }
+      
+      const resourceList = document.getElementById("resourceList");
+      resourceList.innerHTML = "";
+      lessonData.resources.forEach(resource => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a class="text-blue-400 hover:underline" href="${resource.url}" target="_blank">${resource.title}</a> (${resource.type})`;
+        resourceList.appendChild(li);
+      });
+    }
+    
+    const lessonData = loadLessonData();
+    renderLessonDetail(lessonData);
+  </script>
+
+  <!-- Font Awesome for modal icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>
